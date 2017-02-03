@@ -58,7 +58,7 @@ public class PersonControllerTest {
 	@Autowired
 	private PersonService personService;
 
-	@Mock
+	@Autowired
 	private PersonRepository personRepository;
 
 	@Autowired
@@ -67,9 +67,9 @@ public class PersonControllerTest {
 	private final String URL_PERSONS = "/persons";
 	private final String URL_PERSON = "/person?id=test";
 
-	@Mock
+	
 	private static Person objPerson5;
-	@Mock
+	
 	private static Person objPerson6;
 
 	@Before
@@ -79,9 +79,10 @@ public class PersonControllerTest {
 		objPerson5 = stubPersons(5);
 		objPerson6 = stubPersons(6);
 
-		when(personService.findById(any(String.class))).thenReturn(objPerson5);
-		when(personService.findAll()).thenCallRealMethod();
+		/*when(personService.findById(any(String.class))).thenReturn(objPerson5);
+		when(personService.findAll()).thenCallRealMethod();*/
 		when(personRepository.findAll()).thenReturn(Arrays.asList(objPerson5));
+		when(personRepository.findById(any(String.class))).thenReturn(objPerson5);
 	}
 
 	@Test
